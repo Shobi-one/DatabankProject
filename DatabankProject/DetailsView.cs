@@ -77,6 +77,12 @@ namespace DatabankProject
         {
             if (itemType == "Movie")
             {
+                Dictionary<string, string> details = dbHelper.GetMovieDetails(itemName);
+                if (details.ContainsKey("IsInactive") && details["IsInactive"] == "1")
+                {
+                    MessageBox.Show("This movie is inactive and cannot be ordered.");
+                    return;
+                }
                 if (dbHelper.IsMovieAvailable(itemName))
                 {
                     if (dbHelper.CreateOrder(itemName))

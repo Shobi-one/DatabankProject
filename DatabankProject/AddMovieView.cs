@@ -56,7 +56,7 @@ namespace DatabankProject
                     return;
                 }
 
-                dbHelper.AddMovie(txtTitle.Text, txtGenre.Text, txtDirector.Text, txtSynopsis.Text, dtpReleaseDate.Value, txtLanguage.Text, (int)numDuration.Value, txtAmount.Text);
+                dbHelper.AddMovie(txtTitle.Text, txtGenre.Text, txtDirector.Text, txtSynopsis.Text, dtpReleaseDate.Value, txtLanguage.Text, (int)numDuration.Value, txtAmount.Text, 0);
                 MessageBox.Show($"Movie {txtTitle.Text} added");
                 this.Close();
             };

@@ -20,10 +20,26 @@ namespace DatabankProject
             dbHelper = new DatabaseHelper();
         }
 
-        private void LoadData()
+        private void dashboardToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            List<string> movies = dbHelper.GetMovies();
-            PopulateMovieList(movies);
+            DashboardView dash = new DashboardView();
+            dash.Show();
+        }
+
+        private void PopulateMovieList(List<string> movies)
+        {
+            lbMovies.Items.Clear();
+            foreach (string movie in movies)
+            {
+                lbMovies.Items.Add(movie);
+            }
+        }
+
+        private void HomeView_Load(object sender, EventArgs e)
+        {
+            lbMovies.Items.AddRange(dbHelper.GetMovies().Distinct().ToArray());
+            lbMovies.DoubleClick += LbMovies_DoubleClick;
+            Controls.Add(lbMovies);
         }
 
         private void LbMovies_DoubleClick(object sender, EventArgs e)
@@ -37,31 +53,17 @@ namespace DatabankProject
 
         private void ShowDetails(string type, string name)
         {
+            if (type == "Movie")
+            {
+                Dictionary<string, string> details = dbHelper.GetMovieDetails(name);
+                if (details.ContainsKey("IsInactive") && details["IsInactive"] == "1")
+                {
+                    MessageBox.Show("This movie is inactive and cannot be viewed.");
+                    return;
+                }
+            }
             Details detailsView = new Details(type, name);
             detailsView.ShowDialog();
-        }
-
-        private void PopulateMovieList(List<string> movies)
-        {
-            lbMovies.Items.Clear();
-            HashSet<string> uniqueMovies = new HashSet<string>(movies);
-            foreach (string movie in uniqueMovies)
-            {
-                lbMovies.Items.Add(movie);
-            }
-        }
-
-        private void dashboardToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            DashboardView dash = new DashboardView();
-            dash.Show();
-        }
-
-        private void HomeView_Load(object sender, EventArgs e)
-        {
-            lbMovies.Items.AddRange(dbHelper.GetMovies().Distinct().ToArray());
-            lbMovies.DoubleClick += LbMovies_DoubleClick;
-            Controls.Add(lbMovies);
         }
 
         private void btnSearch_Click(object sender, EventArgs e)

@@ -48,6 +48,13 @@ namespace DatabankProject
             var numDuration = new NumericUpDown { Left = 100, Top = 340, Width = 150, Minimum = 1, Maximum = 600 };
 
             var btnAdd = new Button { Text = "Add", Left = 100, Top = 380, Width = 80 };
+            var btnMakeInactive = new Button { Text = "Make Inactive", Left = 100, Top = 420, Width = 120 };
+            btnMakeInactive.Click += (sender, e) =>
+            {
+                dbHelper.MakeMovieInactive(movie.Title);
+                this.Close();
+            };
+
             btnAdd.Click += (sender, e) =>
             {
                 if (txtTitle == null || txtGenre == null || txtDirector == null || txtSynopsis == null || dtpReleaseDate == null || txtLanguage == null || numDuration == null)
@@ -56,7 +63,7 @@ namespace DatabankProject
                     return;
                 }
 
-                dbHelper.AddMovie(txtTitle.Text, txtGenre.Text, txtDirector.Text, txtSynopsis.Text, dtpReleaseDate.Value, txtLanguage.Text, (int)numDuration.Value, txtAmount.Text);
+                dbHelper.AddMovie(txtTitle.Text, txtGenre.Text, txtDirector.Text, txtSynopsis.Text, dtpReleaseDate.Value, txtLanguage.Text, (int)numDuration.Value, txtAmount.Text, 0);
                 MessageBox.Show($"Movie {txtTitle.Text} added");
                 this.Close();
             };
@@ -78,6 +85,7 @@ namespace DatabankProject
             this.Controls.Add(btnAdd);
             this.Controls.Add(lblAmount);
             this.Controls.Add(txtAmount);
+            this.Controls.Add(btnMakeInactive);
 
             txtTitle.Text = movie.Title;
             txtGenre.Text = movie.Genre;

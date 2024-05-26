@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using MySql.Data.MySqlClient;
+using System.Windows.Forms;
 
 namespace DatabankProject
 {
@@ -17,7 +18,7 @@ namespace DatabankProject
             using (MySqlConnection conn = new MySqlConnection(connectionString))
             {
                 conn.Open();
-                MySqlCommand cmd = new MySqlCommand("SELECT title FROM tblmovies", conn);
+                MySqlCommand cmd = new MySqlCommand("SELECT title FROM tblmovies WHERE is_inactive = 0", conn);
                 using (MySqlDataReader reader = cmd.ExecuteReader())
                 {
                     while (reader.Read())
@@ -45,6 +46,35 @@ namespace DatabankProject
                 }
             }
             return userUsernames;
+        }
+
+        public void MakeMovieInactive(string title)
+        {
+            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            {
+                string query = "UPDATE tblmovies SET is_inactive = 1 WHERE title = @Title";
+                using (MySqlCommand command = new MySqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@Title", title);
+                    try
+                    {
+                        connection.Open();
+                        int rowsAffected = command.ExecuteNonQuery();
+                        if (rowsAffected > 0)
+                        {
+                            MessageBox.Show("Movie made inactive successfully.");
+                        }
+                        else
+                        {
+                            MessageBox.Show("No movie found with the provided title.");
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Error: " + ex.Message);
+                    }
+                }
+            }
         }
 
         public Dictionary<string, string> GetMovieDetails(string title)
@@ -105,7 +135,6 @@ namespace DatabankProject
                 {
                     if (reader.Read())
                     {
-                        // Construct movie object from database values
                         return new Movie
                         {
                             Title = reader.GetString("title"),
@@ -129,7 +158,7 @@ namespace DatabankProject
             using (MySqlConnection conn = new MySqlConnection(connectionString))
             {
                 conn.Open();
-                MySqlCommand cmd = new MySqlCommand("SELECT title FROM tblmovies WHERE title LIKE @name", conn);
+                MySqlCommand cmd = new MySqlCommand("SELECT title FROM tblmovies WHERE title LIKE @name AND is_inactive = 0", conn);
                 cmd.Parameters.AddWithValue("@name", "%" + name + "%");
                 using (MySqlDataReader reader = cmd.ExecuteReader())
                 {
@@ -153,7 +182,6 @@ namespace DatabankProject
                 {
                     if (reader.Read())
                     {
-                        // Construct user object from database values
                         return new User
                         {
                             Username = reader.GetString("username"),
@@ -188,12 +216,12 @@ namespace DatabankProject
             }
         }
 
-        public void AddMovie(string title, string genre, string director, string synopsis, DateTime releaseDate, string language, int duration, string amount)
+        public void AddMovie(string title, string genre, string director, string synopsis, DateTime releaseDate, string language, int duration, string amount, int isInactive)
         {
             using (MySqlConnection conn = new MySqlConnection(connectionString))
             {
                 conn.Open();
-                MySqlCommand cmd = new MySqlCommand("INSERT INTO tblmovies (title, genre, director, synopsis, release_date, language, duration, created_at, updated_at, amount) VALUES (@Title, @Genre, @Director, @Synopsis, @ReleaseDate, @Language, @Duration, @CreatedAt, @UpdatedAt, @Amount)", conn);
+                MySqlCommand cmd = new MySqlCommand("INSERT INTO tblmovies (title, genre, director, synopsis, release_date, language, duration, created_at, updated_at, amount, is_inactive) VALUES (@Title, @Genre, @Director, @Synopsis, @ReleaseDate, @Language, @Duration, @CreatedAt, @UpdatedAt, @Amount, @IsInactive)", conn);
                 cmd.Parameters.AddWithValue("@Title", title);
                 cmd.Parameters.AddWithValue("@Genre", genre);
                 cmd.Parameters.AddWithValue("@Director", director);
@@ -204,6 +232,7 @@ namespace DatabankProject
                 cmd.Parameters.AddWithValue("@CreatedAt", DateTime.Now);
                 cmd.Parameters.AddWithValue("@UpdatedAt", DateTime.Now);
                 cmd.Parameters.AddWithValue("@Amount", amount);
+                cmd.Parameters.AddWithValue("@IsInactive", isInactive);
                 cmd.ExecuteNonQuery();
             }
         }
