@@ -40,16 +40,18 @@ namespace DatabankProject
             this.lbMovies.FormattingEnabled = true;
             this.lbMovies.Location = new System.Drawing.Point(12, 12);
             this.lbMovies.Name = "lbMovies";
-            this.lbMovies.Size = new System.Drawing.Size(476, 381);
+            this.lbMovies.Size = new System.Drawing.Size(488, 381);
             this.lbMovies.TabIndex = 0;
+            this.lbMovies.SelectedIndexChanged += new System.EventHandler(this.lbMovies_SelectedIndexChanged);
             // 
             // lbUsers
             // 
             this.lbUsers.FormattingEnabled = true;
-            this.lbUsers.Location = new System.Drawing.Point(521, 12);
+            this.lbUsers.Location = new System.Drawing.Point(506, 12);
             this.lbUsers.Name = "lbUsers";
-            this.lbUsers.Size = new System.Drawing.Size(476, 381);
+            this.lbUsers.Size = new System.Drawing.Size(491, 381);
             this.lbUsers.TabIndex = 1;
+            this.lbUsers.SelectedIndexChanged += new System.EventHandler(this.lbUsers_SelectedIndexChanged);
             // 
             // btnAddMovie
             // 

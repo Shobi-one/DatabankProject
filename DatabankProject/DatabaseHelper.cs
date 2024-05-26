@@ -29,7 +29,6 @@ namespace DatabankProject
             return movieTitles;
         }
 
-        // Method to fetch user usernames as a list of strings
         public List<string> GetUsers()
         {
             List<string> userUsernames = new List<string>();
@@ -54,7 +53,7 @@ namespace DatabankProject
             using (MySqlConnection conn = new MySqlConnection(connectionString))
             {
                 conn.Open();
-                MySqlCommand cmd = new MySqlCommand("SELECT * FROM movies WHERE tbltitle = @title", conn);
+                MySqlCommand cmd = new MySqlCommand("SELECT * FROM tblmovies WHERE title = @title", conn);
                 cmd.Parameters.AddWithValue("@title", title);
                 MySqlDataReader reader = cmd.ExecuteReader();
                 if (reader.Read())
@@ -77,7 +76,7 @@ namespace DatabankProject
             using (MySqlConnection conn = new MySqlConnection(connectionString))
             {
                 conn.Open();
-                MySqlCommand cmd = new MySqlCommand("SELECT * FROM users WHERE tblusername = @username", conn);
+                MySqlCommand cmd = new MySqlCommand("SELECT * FROM tblusers WHERE username = @username", conn);
                 cmd.Parameters.AddWithValue("@username", username);
                 MySqlDataReader reader = cmd.ExecuteReader();
                 if (reader.Read())
@@ -93,14 +92,72 @@ namespace DatabankProject
             }
             return details;
         }
-        public void AddUser(string username, string email, string firstName, string lastName, bool isAdmin)
+
+        public Movie GetMovieByTitle(string title)
         {
             using (MySqlConnection conn = new MySqlConnection(connectionString))
             {
                 conn.Open();
-                MySqlCommand cmd = new MySqlCommand("INSERT INTO tblusers (username, email, first_name, last_name, is_admin, created_at, updated_at) VALUES (@username, @Email, @FirstName, @LastName, @IsAdmin, @CreatedAt, @UpdatedAt)", conn);
+                MySqlCommand cmd = new MySqlCommand("SELECT * FROM tblmovies WHERE title = @Title", conn);
+                cmd.Parameters.AddWithValue("@Title", title);
+                using (MySqlDataReader reader = cmd.ExecuteReader())
+                {
+                    if (reader.Read())
+                    {
+                        // Construct movie object from database values
+                        return new Movie
+                        {
+                            Title = reader.GetString("title"),
+                            Genre = reader.GetString("genre"),
+                            Director = reader.GetString("director"),
+                            Synopsis = reader.GetString("synopsis"),
+                            ReleaseDate = reader.GetDateTime("release_date"),
+                            Language = reader.GetString("language"),
+                            Duration = reader.GetInt32("duration")
+                        };
+                    }
+                }
+            }
+            return null;
+        }
+
+        public User GetUserByUsername(string username)
+        {
+            using (MySqlConnection conn = new MySqlConnection(connectionString))
+            {
+                conn.Open();
+                MySqlCommand cmd = new MySqlCommand("SELECT * FROM users WHERE username = @Username", conn);
+                cmd.Parameters.AddWithValue("@Username", username);
+                using (MySqlDataReader reader = cmd.ExecuteReader())
+                {
+                    if (reader.Read())
+                    {
+                        // Construct user object from database values
+                        return new User
+                        {
+                            Username = reader.GetString("username"),
+                            Email = reader.GetString("email"),
+                            FirstName = reader.GetString("first_name"),
+                            LastName = reader.GetString("last_name"),
+                            IsAdmin = reader.GetBoolean("is_admin")
+                        };
+                    }
+                }
+            }
+            return null;
+        }
+
+
+
+        public void AddUser(string username, string email, string password_hash, string firstName, string lastName, bool isAdmin)
+        {
+            using (MySqlConnection conn = new MySqlConnection(connectionString))
+            {
+                conn.Open();
+                MySqlCommand cmd = new MySqlCommand("INSERT INTO tblusers (username, email, password_hash, first_name, last_name, is_admin, created_at, updated_at) VALUES (@username, @Email, @Password_Hash, @FirstName, @LastName, @IsAdmin, @CreatedAt, @UpdatedAt)", conn);
                 cmd.Parameters.AddWithValue("@username", username);
                 cmd.Parameters.AddWithValue("@Email", email);
+                cmd.Parameters.AddWithValue("@Password_Hash", password_hash);
                 cmd.Parameters.AddWithValue("@FirstName", firstName);
                 cmd.Parameters.AddWithValue("@LastName", lastName);
                 cmd.Parameters.AddWithValue("@IsAdmin", isAdmin);

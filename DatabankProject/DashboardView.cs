@@ -92,5 +92,35 @@ namespace DatabankProject
             addUserForm.ShowDialog();
             LoadData();
         }
+
+        private void lbMovies_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (lbMovies.SelectedIndex != -1) // Ensure an item is selected
+            {
+                string selectedMovieTitle = lbMovies.SelectedItem.ToString();
+                Movie movie = dbHelper.GetMovieByTitle(selectedMovieTitle);
+                if (movie != null)
+                {
+                    // Show the AddMovieForm with pre-filled data
+                    AddMovieView addMovieForm = new AddMovieView();
+                    addMovieForm.ShowDialog();
+                }
+            }
+        }
+
+        private void lbUsers_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (lbUsers.SelectedIndex != -1) // Ensure an item is selected
+            {
+                string selectedUsername = lbUsers.SelectedItem.ToString();
+                User user = dbHelper.GetUserByUsername(selectedUsername);
+                if (user != null)
+                {
+                    // Show the AddUserForm with pre-filled data
+                    AddUserView addUserForm = new AddUserView();
+                    addUserForm.ShowDialog();
+                }
+            }
+        }
     }
 }
