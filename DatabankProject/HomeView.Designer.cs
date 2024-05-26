@@ -1,7 +1,7 @@
 ﻿
 namespace DatabankProject
 {
-    partial class Form1
+    partial class HomeView
     {
         /// <summary>
         /// Required designer variable.
