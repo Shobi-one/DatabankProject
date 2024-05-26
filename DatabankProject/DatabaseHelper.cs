@@ -65,7 +65,7 @@ namespace DatabankProject
                     details["ReleaseDate"] = reader.GetDateTime("release_date").ToString("yyyy-MM-dd");
                     details["Language"] = reader.GetString("language");
                     details["Duration"] = reader.GetInt32("duration").ToString();
-                    details["Amount"] = reader.GetInt32("duration").ToString();
+                    details["Amount"] = reader.GetInt32("amount").ToString();
                 }
             }
             return details;
@@ -205,6 +205,106 @@ namespace DatabankProject
                 cmd.Parameters.AddWithValue("@UpdatedAt", DateTime.Now);
                 cmd.Parameters.AddWithValue("@Amount", amount);
                 cmd.ExecuteNonQuery();
+            }
+        }
+        public bool IsMovieAvailable(string title)
+        {
+            using (MySqlConnection conn = new MySqlConnection(connectionString))
+            {
+                conn.Open();
+                string query = "SELECT amount FROM tblmovies WHERE title = @title";
+                using (MySqlCommand cmd = new MySqlCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("@title", title);
+                    int amount = Convert.ToInt32(cmd.ExecuteScalar());
+                    return amount > 0;
+                }
+            }
+        }
+
+        public int GetMovieIdByTitle(string title)
+        {
+            using (MySqlConnection conn = new MySqlConnection(connectionString))
+            {
+                conn.Open();
+                string query = "SELECT movie_id FROM tblmovies WHERE title = @title";
+                using (MySqlCommand cmd = new MySqlCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("@title", title);
+                    object result = cmd.ExecuteScalar();
+                    if (result != null)
+                    {
+                        return Convert.ToInt32(result);
+                    }
+                    else
+                    {
+                        throw new Exception("Movie not found.");
+                    }
+                }
+            }
+        }
+
+        public bool CreateOrder(string movieTitle)
+        {
+            try
+            {
+                using (MySqlConnection conn = new MySqlConnection(connectionString))
+                {
+                    conn.Open();
+                    using (MySqlTransaction transaction = conn.BeginTransaction())
+                    {
+                        try
+                        {
+                            // Check if movie is available
+                            string checkAmountQuery = "SELECT amount FROM tblmovies WHERE title = @title";
+                            using (MySqlCommand cmd = new MySqlCommand(checkAmountQuery, conn, transaction))
+                            {
+                                cmd.Parameters.AddWithValue("@title", movieTitle);
+                                int amount = Convert.ToInt32(cmd.ExecuteScalar());
+                                if (amount <= 0)
+                                {
+                                    Console.WriteLine("Movie is out of stock.");
+                                    return false;
+                                }
+                            }
+
+                            // Get movie ID
+                            int movieId = GetMovieIdByTitle(movieTitle);
+
+                            // Insert into tbltransactions
+                            string createOrderQuery = "INSERT INTO tbltransactions (movie_id, rental_date) VALUES (@movie_id, @rental_date)";
+                            using (MySqlCommand cmd = new MySqlCommand(createOrderQuery, conn, transaction))
+                            {
+                                cmd.Parameters.AddWithValue("@movie_id", movieId);
+                                cmd.Parameters.AddWithValue("@rental_date", DateTime.Now);
+                                cmd.ExecuteNonQuery();
+                            }
+
+                            // Update amount
+                            string updateAmountQuery = "UPDATE tblmovies SET amount = amount - 1 WHERE title = @title";
+                            using (MySqlCommand cmd = new MySqlCommand(updateAmountQuery, conn, transaction))
+                            {
+                                cmd.Parameters.AddWithValue("@title", movieTitle);
+                                cmd.ExecuteNonQuery();
+                            }
+
+                            transaction.Commit();
+                            Console.WriteLine("Order created successfully.");
+                            return true;
+                        }
+                        catch (Exception ex)
+                        {
+                            transaction.Rollback();
+                            Console.WriteLine($"Transaction rolled back: {ex.Message}");
+                            return false;
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error creating order: {ex.Message}");
+                return false;
             }
         }
     }

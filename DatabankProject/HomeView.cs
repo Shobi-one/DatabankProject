@@ -18,20 +18,12 @@ namespace DatabankProject
         {
             InitializeComponent();
             dbHelper = new DatabaseHelper();
-            LoadData();
         }
 
         private void LoadData()
         {
-            // Load data from the database and populate the lists
             List<string> movies = dbHelper.GetMovies();
-
-            // Populate lists
-            lbMovies.Items.Clear();
-            foreach (string movie in movies)
-            {
-                lbMovies.Items.Add(movie);
-            }
+            PopulateMovieList(movies);
         }
 
         private void LbMovies_DoubleClick(object sender, EventArgs e)
@@ -52,7 +44,8 @@ namespace DatabankProject
         private void PopulateMovieList(List<string> movies)
         {
             lbMovies.Items.Clear();
-            foreach (string movie in movies)
+            HashSet<string> uniqueMovies = new HashSet<string>(movies);
+            foreach (string movie in uniqueMovies)
             {
                 lbMovies.Items.Add(movie);
             }
@@ -66,7 +59,7 @@ namespace DatabankProject
 
         private void HomeView_Load(object sender, EventArgs e)
         {
-            lbMovies.Items.AddRange(dbHelper.GetMovies().ToArray());
+            lbMovies.Items.AddRange(dbHelper.GetMovies().Distinct().ToArray());
             lbMovies.DoubleClick += LbMovies_DoubleClick;
             Controls.Add(lbMovies);
         }

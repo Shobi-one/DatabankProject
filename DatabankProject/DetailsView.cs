@@ -1,11 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace DatabankProject
@@ -13,12 +7,17 @@ namespace DatabankProject
     public partial class Details : Form
     {
         private Label lblDetails;
+        private Button btnOrder;
         private DatabaseHelper dbHelper;
+        private string itemType;
+        private string itemName;
 
         public Details(string type, string name)
         {
             InitializeComponent();
             dbHelper = new DatabaseHelper();
+            itemType = type;
+            itemName = name;
 
             Dictionary<string, string> details;
             if (type == "Movie")
@@ -30,7 +29,8 @@ namespace DatabankProject
                 details = dbHelper.GetUserDetails(name);
             }
 
-            this.lblDetails = new System.Windows.Forms.Label();
+            this.lblDetails = new Label();
+            this.btnOrder = new Button();
             this.SuspendLayout();
             // 
             // lblDetails
@@ -42,11 +42,22 @@ namespace DatabankProject
             this.lblDetails.TabIndex = 0;
             this.lblDetails.Text = "Details";
             // 
-            // DetailsView
+            // btnOrder
+            // 
+            this.btnOrder.Location = new System.Drawing.Point(16, 230);
+            this.btnOrder.Name = "btnOrder";
+            this.btnOrder.Size = new System.Drawing.Size(75, 23);
+            this.btnOrder.TabIndex = 1;
+            this.btnOrder.Text = "Order";
+            this.btnOrder.UseVisualStyleBackColor = true;
+            this.btnOrder.Click += new System.EventHandler(this.btnOrder_Click);
+            // 
+            // Details
             // 
             this.ClientSize = new System.Drawing.Size(284, 261);
+            this.Controls.Add(this.btnOrder);
             this.Controls.Add(this.lblDetails);
-            this.Name = "DetailsView";
+            this.Name = "Details";
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -59,6 +70,28 @@ namespace DatabankProject
             foreach (var detail in details)
             {
                 lblDetails.Text += $"{detail.Key}: {detail.Value}\n";
+            }
+        }
+
+        private void btnOrder_Click(object sender, EventArgs e)
+        {
+            if (itemType == "Movie")
+            {
+                if (dbHelper.IsMovieAvailable(itemName))
+                {
+                    if (dbHelper.CreateOrder(itemName))
+                    {
+                        MessageBox.Show($"Ordered movie: {itemName}");
+                    }
+                    else
+                    {
+                        MessageBox.Show("Failed to create order. Check logs for details.");
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Movie is out of stock.");
+                }
             }
         }
     }
