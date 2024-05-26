@@ -13,34 +13,39 @@ namespace DatabankProject
 
         public List<string> GetMovies()
         {
-            List<string> movies = new List<string>();
+            List<string> movieTitles = new List<string>();
             using (MySqlConnection conn = new MySqlConnection(connectionString))
             {
                 conn.Open();
-                MySqlCommand cmd = new MySqlCommand("SELECT title FROM movies", conn);
-                MySqlDataReader reader = cmd.ExecuteReader();
-                while (reader.Read())
+                MySqlCommand cmd = new MySqlCommand("SELECT title FROM tblmovies", conn);
+                using (MySqlDataReader reader = cmd.ExecuteReader())
                 {
-                    movies.Add(reader.GetString("title"));
+                    while (reader.Read())
+                    {
+                        movieTitles.Add(reader.GetString(0));
+                    }
                 }
             }
-            return movies;
+            return movieTitles;
         }
 
+        // Method to fetch user usernames as a list of strings
         public List<string> GetUsers()
         {
-            List<string> users = new List<string>();
+            List<string> userUsernames = new List<string>();
             using (MySqlConnection conn = new MySqlConnection(connectionString))
             {
                 conn.Open();
-                MySqlCommand cmd = new MySqlCommand("SELECT username FROM users", conn);
-                MySqlDataReader reader = cmd.ExecuteReader();
-                while (reader.Read())
+                MySqlCommand cmd = new MySqlCommand("SELECT username FROM tblusers", conn);
+                using (MySqlDataReader reader = cmd.ExecuteReader())
                 {
-                    users.Add(reader.GetString("username"));
+                    while (reader.Read())
+                    {
+                        userUsernames.Add(reader.GetString(0));
+                    }
                 }
             }
-            return users;
+            return userUsernames;
         }
 
         public Dictionary<string, string> GetMovieDetails(string title)
@@ -49,7 +54,7 @@ namespace DatabankProject
             using (MySqlConnection conn = new MySqlConnection(connectionString))
             {
                 conn.Open();
-                MySqlCommand cmd = new MySqlCommand("SELECT * FROM movies WHERE title = @title", conn);
+                MySqlCommand cmd = new MySqlCommand("SELECT * FROM movies WHERE tbltitle = @title", conn);
                 cmd.Parameters.AddWithValue("@title", title);
                 MySqlDataReader reader = cmd.ExecuteReader();
                 if (reader.Read())
@@ -72,7 +77,7 @@ namespace DatabankProject
             using (MySqlConnection conn = new MySqlConnection(connectionString))
             {
                 conn.Open();
-                MySqlCommand cmd = new MySqlCommand("SELECT * FROM users WHERE username = @username", conn);
+                MySqlCommand cmd = new MySqlCommand("SELECT * FROM users WHERE tblusername = @username", conn);
                 cmd.Parameters.AddWithValue("@username", username);
                 MySqlDataReader reader = cmd.ExecuteReader();
                 if (reader.Read())
@@ -87,6 +92,41 @@ namespace DatabankProject
                 }
             }
             return details;
+        }
+        public void AddUser(string username, string email, string firstName, string lastName, bool isAdmin)
+        {
+            using (MySqlConnection conn = new MySqlConnection(connectionString))
+            {
+                conn.Open();
+                MySqlCommand cmd = new MySqlCommand("INSERT INTO tblusers (username, email, first_name, last_name, is_admin, created_at, updated_at) VALUES (@username, @Email, @FirstName, @LastName, @IsAdmin, @CreatedAt, @UpdatedAt)", conn);
+                cmd.Parameters.AddWithValue("@username", username);
+                cmd.Parameters.AddWithValue("@Email", email);
+                cmd.Parameters.AddWithValue("@FirstName", firstName);
+                cmd.Parameters.AddWithValue("@LastName", lastName);
+                cmd.Parameters.AddWithValue("@IsAdmin", isAdmin);
+                cmd.Parameters.AddWithValue("@CreatedAt", DateTime.Now);
+                cmd.Parameters.AddWithValue("@UpdatedAt", DateTime.Now);
+                cmd.ExecuteNonQuery();
+            }
+        }
+
+        public void AddMovie(string title, string genre, string director, string synopsis, DateTime releaseDate, string language, int duration)
+        {
+            using (MySqlConnection conn = new MySqlConnection(connectionString))
+            {
+                conn.Open();
+                MySqlCommand cmd = new MySqlCommand("INSERT INTO tblmovies (title, genre, director, synopsis, release_date, language, duration, created_at, updated_at) VALUES (@Title, @Genre, @Director, @Synopsis, @ReleaseDate, @Language, @Duration, @CreatedAt, @UpdatedAt)", conn);
+                cmd.Parameters.AddWithValue("@Title", title);
+                cmd.Parameters.AddWithValue("@Genre", genre);
+                cmd.Parameters.AddWithValue("@Director", director);
+                cmd.Parameters.AddWithValue("@Synopsis", synopsis);
+                cmd.Parameters.AddWithValue("@ReleaseDate", releaseDate);
+                cmd.Parameters.AddWithValue("@Language", language);
+                cmd.Parameters.AddWithValue("@Duration", duration);
+                cmd.Parameters.AddWithValue("@CreatedAt", DateTime.Now);
+                cmd.Parameters.AddWithValue("@UpdatedAt", DateTime.Now);
+                cmd.ExecuteNonQuery();
+            }
         }
     }
 }

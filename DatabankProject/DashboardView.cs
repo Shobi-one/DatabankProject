@@ -19,7 +19,7 @@ namespace DatabankProject
         {
             InitializeComponent();
             dbHelper = new DatabaseHelper();
-            Load += DashboardView_Load;
+            LoadData();
         }
 
         private void DashboardView_Load(object sender, EventArgs e)
@@ -28,13 +28,31 @@ namespace DatabankProject
             lbMovies.Items.AddRange(dbHelper.GetMovies().ToArray());
             lbUsers.Items.AddRange(dbHelper.GetUsers().ToArray());
 
-            // Event Handler
             lbMovies.DoubleClick += LbMovies_DoubleClick;
             lbUsers.DoubleClick += LbUsers_DoubleClick;
 
-            // Add ListBoxes
             Controls.Add(lbMovies);
             Controls.Add(lbUsers);
+        }
+
+        private void LoadData()
+        {
+            // Load data from the database and populate the lists
+            List<string> movies = dbHelper.GetMovies();
+            List<string> users = dbHelper.GetUsers();
+
+            // Populate lists
+            lbMovies.Items.Clear();
+            foreach (string movie in movies)
+            {
+                lbMovies.Items.Add(movie);
+            }
+
+            lbUsers.Items.Clear();
+            foreach (string user in users)
+            {
+                lbUsers.Items.Add(user);
+            }
         }
 
         private void LbMovies_DoubleClick(object sender, EventArgs e)
@@ -57,8 +75,22 @@ namespace DatabankProject
 
         private void ShowDetails(string type, string name)
         {
-            DetailsView detailsView = new DetailsView(type, name);
+            Details detailsView = new Details(type, name);
             detailsView.ShowDialog();
+        }
+
+        private void btnAddMovie_Click(object sender, EventArgs e)
+        {
+            AddMovieView addMovieForm = new AddMovieView();
+            addMovieForm.ShowDialog();
+            LoadData();
+        }
+
+        private void btnAddUser_Click(object sender, EventArgs e)
+        {
+            AddUserView addUserForm = new AddUserView();
+            addUserForm.ShowDialog();
+            LoadData();
         }
     }
 }

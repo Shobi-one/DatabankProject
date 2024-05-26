@@ -10,12 +10,12 @@ using System.Windows.Forms;
 
 namespace DatabankProject
 {
-    public partial class DetailsView : Form
+    public partial class Details : Form
     {
         private Label lblDetails;
         private DatabaseHelper dbHelper;
 
-        public DetailsView(string type, string name)
+        public Details(string type, string name)
         {
             InitializeComponent();
             dbHelper = new DatabaseHelper();

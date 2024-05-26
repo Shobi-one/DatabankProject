@@ -16,5 +16,11 @@ namespace DatabankProject
         {
             InitializeComponent();
         }
+
+        private void dashboardToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DashboardView dash = new DashboardView();
+            dash.Show();
+        }
     }
 }

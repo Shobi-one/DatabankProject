@@ -1,7 +1,7 @@
 ﻿
 namespace DatabankProject
 {
-    partial class DetailsView
+    partial class Details
     {
         /// <summary>
         /// Required designer variable.
@@ -31,12 +31,12 @@ namespace DatabankProject
         {
             this.SuspendLayout();
             // 
-            // DetailsView
+            // Details
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Name = "DetailsView";
+            this.Name = "Details";
             this.Text = "DetailsView";
             this.ResumeLayout(false);
 

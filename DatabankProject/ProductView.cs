@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace DatabankProject
 {
-    public partial class ProductView : Form
+    public partial class Product : Form
     {
-        public ProductView()
+        public Product()
         {
             InitializeComponent();
         }
