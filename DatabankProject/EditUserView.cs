@@ -10,11 +10,10 @@ using System.Windows.Forms;
 
 namespace DatabankProject
 {
-    public partial class AddUserView : Form
+    public partial class EditUserView : Form
     {
         private DatabaseHelper dbHelper;
-
-        public AddUserView()
+        public EditUserView(User user)
         {
             InitializeComponent();
             dbHelper = new DatabaseHelper();
@@ -60,6 +59,12 @@ namespace DatabankProject
             this.Controls.Add(txtLastName);
             this.Controls.Add(chkIsAdmin);
             this.Controls.Add(btnAdd);
+
+            txtUsername.Text = user.Username;
+            txtEmail.Text = user.Email;
+            txtFirstName.Text = user.FirstName;
+            txtLastName.Text = user.LastName;
+            chkIsAdmin.Checked = user.IsAdmin;
         }
     }
 }

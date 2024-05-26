@@ -102,8 +102,8 @@ namespace DatabankProject
                 if (movie != null)
                 {
                     // Show the AddMovieForm with pre-filled data
-                    AddMovieView addMovieForm = new AddMovieView();
-                    addMovieForm.ShowDialog();
+                    EditMovieView EditMovieForm = new EditMovieView(movie);
+                    EditMovieForm.ShowDialog();
                 }
             }
         }
@@ -117,8 +117,8 @@ namespace DatabankProject
                 if (user != null)
                 {
                     // Show the AddUserForm with pre-filled data
-                    AddUserView addUserForm = new AddUserView();
-                    addUserForm.ShowDialog();
+                    EditUserView editUserForm = new EditUserView(user);
+                    editUserForm.ShowDialog();
                 }
             }
         }

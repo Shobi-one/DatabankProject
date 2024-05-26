@@ -126,7 +126,7 @@ namespace DatabankProject
             using (MySqlConnection conn = new MySqlConnection(connectionString))
             {
                 conn.Open();
-                MySqlCommand cmd = new MySqlCommand("SELECT * FROM users WHERE username = @Username", conn);
+                MySqlCommand cmd = new MySqlCommand("SELECT * FROM tblusers WHERE username = @Username", conn);
                 cmd.Parameters.AddWithValue("@Username", username);
                 using (MySqlDataReader reader = cmd.ExecuteReader())
                 {

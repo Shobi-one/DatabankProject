@@ -123,6 +123,18 @@
     <Compile Include="DetailsView.Designer.cs">
       <DependentUpon>DetailsView.cs</DependentUpon>
     </Compile>
+    <Compile Include="EditMovieView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EditMovieView.Designer.cs">
+      <DependentUpon>EditMovieView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="EditUserView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EditUserView.Designer.cs">
+      <DependentUpon>EditUserView.cs</DependentUpon>
+    </Compile>
     <Compile Include="HomeView.cs">
       <SubType>Form</SubType>
     </Compile>
