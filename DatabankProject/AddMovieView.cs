@@ -41,10 +41,13 @@ namespace DatabankProject
             var lblLanguage = new Label { Text = "Language:", Left = 10, Top = 260 };
             var txtLanguage = new TextBox { Left = 100, Top = 260, Width = 150 };
 
-            var lblDuration = new Label { Text = "Duration:", Left = 10, Top = 300 };
-            var numDuration = new NumericUpDown { Left = 100, Top = 300, Width = 150, Minimum = 1, Maximum = 600 };
+            var lblAmount = new Label { Text = "Amount:", Left = 10, Top = 260 };
+            var txtAmount = new TextBox { Left = 100, Top = 300, Width = 150 };
 
-            var btnAdd = new Button { Text = "Add", Left = 100, Top = 340, Width = 80 };
+            var lblDuration = new Label { Text = "Duration:", Left = 10, Top = 300 };
+            var numDuration = new NumericUpDown { Left = 100, Top = 340, Width = 150, Minimum = 1, Maximum = 600 };
+
+            var btnAdd = new Button { Text = "Add", Left = 100, Top = 380, Width = 80 };
             btnAdd.Click += (sender, e) =>
             {
                 if (txtTitle == null || txtGenre == null || txtDirector == null || txtSynopsis == null || dtpReleaseDate == null || txtLanguage == null || numDuration == null)
@@ -53,7 +56,7 @@ namespace DatabankProject
                     return;
                 }
 
-                dbHelper.AddMovie(txtTitle.Text, txtGenre.Text, txtDirector.Text, txtSynopsis.Text, dtpReleaseDate.Value, txtLanguage.Text, (int)numDuration.Value);
+                dbHelper.AddMovie(txtTitle.Text, txtGenre.Text, txtDirector.Text, txtSynopsis.Text, dtpReleaseDate.Value, txtLanguage.Text, (int)numDuration.Value, txtAmount.Text);
                 MessageBox.Show($"Movie {txtTitle.Text} added");
                 this.Close();
             };
@@ -73,6 +76,9 @@ namespace DatabankProject
             this.Controls.Add(lblDuration);
             this.Controls.Add(numDuration);
             this.Controls.Add(btnAdd);
+            this.Controls.Add(lblAmount);
+            this.Controls.Add(txtAmount);
+
         }
     }
 }

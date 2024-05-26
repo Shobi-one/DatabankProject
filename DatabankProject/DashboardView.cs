@@ -41,7 +41,6 @@ namespace DatabankProject
             List<string> movies = dbHelper.GetMovies();
             List<string> users = dbHelper.GetUsers();
 
-            // Populate lists
             lbMovies.Items.Clear();
             foreach (string movie in movies)
             {
@@ -95,13 +94,12 @@ namespace DatabankProject
 
         private void lbMovies_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (lbMovies.SelectedIndex != -1) // Ensure an item is selected
+            if (lbMovies.SelectedIndex != -1)
             {
                 string selectedMovieTitle = lbMovies.SelectedItem.ToString();
                 Movie movie = dbHelper.GetMovieByTitle(selectedMovieTitle);
                 if (movie != null)
                 {
-                    // Show the AddMovieForm with pre-filled data
                     EditMovieView EditMovieForm = new EditMovieView(movie);
                     EditMovieForm.ShowDialog();
                 }
@@ -110,13 +108,12 @@ namespace DatabankProject
 
         private void lbUsers_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (lbUsers.SelectedIndex != -1) // Ensure an item is selected
+            if (lbUsers.SelectedIndex != -1)
             {
                 string selectedUsername = lbUsers.SelectedItem.ToString();
                 User user = dbHelper.GetUserByUsername(selectedUsername);
                 if (user != null)
                 {
-                    // Show the AddUserForm with pre-filled data
                     EditUserView editUserForm = new EditUserView(user);
                     editUserForm.ShowDialog();
                 }

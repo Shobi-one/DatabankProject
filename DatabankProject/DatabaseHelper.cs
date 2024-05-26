@@ -65,6 +65,7 @@ namespace DatabankProject
                     details["ReleaseDate"] = reader.GetDateTime("release_date").ToString("yyyy-MM-dd");
                     details["Language"] = reader.GetString("language");
                     details["Duration"] = reader.GetInt32("duration").ToString();
+                    details["Amount"] = reader.GetInt32("duration").ToString();
                 }
             }
             return details;
@@ -113,12 +114,32 @@ namespace DatabankProject
                             Synopsis = reader.GetString("synopsis"),
                             ReleaseDate = reader.GetDateTime("release_date"),
                             Language = reader.GetString("language"),
-                            Duration = reader.GetInt32("duration")
+                            Duration = reader.GetInt32("duration"),
+                            Amount = reader.GetInt32("amount")
                         };
                     }
                 }
             }
             return null;
+        }
+
+        public List<string> SearchMoviesByName(string name)
+        {
+            List<string> movieTitles = new List<string>();
+            using (MySqlConnection conn = new MySqlConnection(connectionString))
+            {
+                conn.Open();
+                MySqlCommand cmd = new MySqlCommand("SELECT title FROM tblmovies WHERE title LIKE @name", conn);
+                cmd.Parameters.AddWithValue("@name", "%" + name + "%");
+                using (MySqlDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        movieTitles.Add(reader.GetString(0));
+                    }
+                }
+            }
+            return movieTitles;
         }
 
         public User GetUserByUsername(string username)
@@ -167,12 +188,12 @@ namespace DatabankProject
             }
         }
 
-        public void AddMovie(string title, string genre, string director, string synopsis, DateTime releaseDate, string language, int duration)
+        public void AddMovie(string title, string genre, string director, string synopsis, DateTime releaseDate, string language, int duration, string amount)
         {
             using (MySqlConnection conn = new MySqlConnection(connectionString))
             {
                 conn.Open();
-                MySqlCommand cmd = new MySqlCommand("INSERT INTO tblmovies (title, genre, director, synopsis, release_date, language, duration, created_at, updated_at) VALUES (@Title, @Genre, @Director, @Synopsis, @ReleaseDate, @Language, @Duration, @CreatedAt, @UpdatedAt)", conn);
+                MySqlCommand cmd = new MySqlCommand("INSERT INTO tblmovies (title, genre, director, synopsis, release_date, language, duration, created_at, updated_at, amount) VALUES (@Title, @Genre, @Director, @Synopsis, @ReleaseDate, @Language, @Duration, @CreatedAt, @UpdatedAt, @Amount)", conn);
                 cmd.Parameters.AddWithValue("@Title", title);
                 cmd.Parameters.AddWithValue("@Genre", genre);
                 cmd.Parameters.AddWithValue("@Director", director);
@@ -182,6 +203,7 @@ namespace DatabankProject
                 cmd.Parameters.AddWithValue("@Duration", duration);
                 cmd.Parameters.AddWithValue("@CreatedAt", DateTime.Now);
                 cmd.Parameters.AddWithValue("@UpdatedAt", DateTime.Now);
+                cmd.Parameters.AddWithValue("@Amount", amount);
                 cmd.ExecuteNonQuery();
             }
         }

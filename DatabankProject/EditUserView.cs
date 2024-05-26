@@ -18,7 +18,7 @@ namespace DatabankProject
             InitializeComponent();
             dbHelper = new DatabaseHelper();
 
-            this.Text = "Add User";
+            this.Text = "Edit User";
             this.ClientSize = new System.Drawing.Size(300, 200);
 
             var lblUsername = new Label { Text = "Username:", Left = 0, Top = 20 };
