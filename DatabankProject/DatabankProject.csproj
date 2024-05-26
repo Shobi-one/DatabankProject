@@ -98,11 +98,18 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DatabaseHelper.cs" />
     <Compile Include="DashboardView.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="DashboardView.Designer.cs">
       <DependentUpon>DashboardView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DetailsView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DetailsView.Designer.cs">
+      <DependentUpon>DetailsView.cs</DependentUpon>
     </Compile>
     <Compile Include="HomeView.cs">
       <SubType>Form</SubType>
@@ -118,6 +125,12 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="DashboardView.resx">
+      <DependentUpon>DashboardView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DetailsView.resx">
+      <DependentUpon>DetailsView.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -142,7 +155,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="assets\" />
+    <Folder Include="assets\scripts\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
