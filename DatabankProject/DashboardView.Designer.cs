@@ -38,7 +38,7 @@ namespace DatabankProject
             // lbMovies
             // 
             this.lbMovies.FormattingEnabled = true;
-            this.lbMovies.Location = new System.Drawing.Point(12, 12);
+            this.lbMovies.Location = new System.Drawing.Point(12, 70);
             this.lbMovies.Name = "lbMovies";
             this.lbMovies.Size = new System.Drawing.Size(488, 381);
             this.lbMovies.TabIndex = 0;
@@ -47,7 +47,7 @@ namespace DatabankProject
             // lbUsers
             // 
             this.lbUsers.FormattingEnabled = true;
-            this.lbUsers.Location = new System.Drawing.Point(506, 12);
+            this.lbUsers.Location = new System.Drawing.Point(506, 70);
             this.lbUsers.Name = "lbUsers";
             this.lbUsers.Size = new System.Drawing.Size(491, 381);
             this.lbUsers.TabIndex = 1;
@@ -55,7 +55,7 @@ namespace DatabankProject
             // 
             // btnAddMovie
             // 
-            this.btnAddMovie.Location = new System.Drawing.Point(12, 408);
+            this.btnAddMovie.Location = new System.Drawing.Point(12, 466);
             this.btnAddMovie.Name = "btnAddMovie";
             this.btnAddMovie.Size = new System.Drawing.Size(214, 23);
             this.btnAddMovie.TabIndex = 2;
@@ -65,7 +65,7 @@ namespace DatabankProject
             // 
             // btnAddUser
             // 
-            this.btnAddUser.Location = new System.Drawing.Point(12, 437);
+            this.btnAddUser.Location = new System.Drawing.Point(12, 495);
             this.btnAddUser.Name = "btnAddUser";
             this.btnAddUser.Size = new System.Drawing.Size(214, 23);
             this.btnAddUser.TabIndex = 3;
@@ -77,6 +77,7 @@ namespace DatabankProject
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(28)))), ((int)(((byte)(28)))));
             this.ClientSize = new System.Drawing.Size(1009, 610);
             this.Controls.Add(this.btnAddUser);
             this.Controls.Add(this.btnAddMovie);

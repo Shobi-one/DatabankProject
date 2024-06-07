@@ -18,6 +18,9 @@ namespace DatabankProject
         {
             InitializeComponent();
             dbHelper = new DatabaseHelper();
+            this.Text = string.Empty;
+            this.ControlBox = false;
+            this.FormBorderStyle = FormBorderStyle.SizableToolWindow;
         }
 
         private void dashboardToolStripMenuItem_Click(object sender, EventArgs e)
