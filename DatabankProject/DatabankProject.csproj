@@ -197,5 +197,8 @@
   <ItemGroup>
     <None Include="Resources\img.png" />
   </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="assets\img\userico.jpg" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -21,6 +21,8 @@ namespace DatabankProject
             this.Text = string.Empty;
             this.ControlBox = false;
             this.FormBorderStyle = FormBorderStyle.SizableToolWindow;
+
+            this.txtSearch.KeyPress += new System.Windows.Forms.KeyPressEventHandler(CheckEnterKeyPress);
         }
 
         private void dashboardToolStripMenuItem_Click(object sender, EventArgs e)
@@ -68,6 +70,8 @@ namespace DatabankProject
             Details detailsView = new Details(type, name);
             detailsView.ShowDialog();
         }
+
+        //search functionality
         private void txtSearch_Enter(object sender, EventArgs e)
         {
             txtSearch.Text = string.Empty;
@@ -77,17 +81,20 @@ namespace DatabankProject
             txtSearch.Text = "🔎︎ Search";
         }
 
-        private void btnSearch_Click(object sender, EventArgs e)
+        private void CheckEnterKeyPress(object sender, System.Windows.Forms.KeyPressEventArgs e)
         {
-            string searchQuery = txtSearch.Text;
-            List<string> filteredMovies = dbHelper.SearchMoviesByName(searchQuery);
-            PopulateMovieList(filteredMovies);
+            if (e.KeyChar == (char)Keys.Return)
+
+            {
+                string searchQuery = txtSearch.Text;
+                List<string> filteredMovies = dbHelper.SearchMoviesByName(searchQuery);
+                PopulateMovieList(filteredMovies);
+            }
         }
 
-        private void pictureBox1_Click(object sender, EventArgs e)
+        private void Logo_Click(object sender, EventArgs e)
         {
 
         }
-
     }
 }
