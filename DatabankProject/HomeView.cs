@@ -68,6 +68,14 @@ namespace DatabankProject
             Details detailsView = new Details(type, name);
             detailsView.ShowDialog();
         }
+        private void txtSearch_Enter(object sender, EventArgs e)
+        {
+            txtSearch.Text = string.Empty;
+        }
+        private void txtSearch_Leave(object sender, EventArgs e)
+        {
+            txtSearch.Text = "🔎︎ Search";
+        }
 
         private void btnSearch_Click(object sender, EventArgs e)
         {
@@ -75,5 +83,11 @@ namespace DatabankProject
             List<string> filteredMovies = dbHelper.SearchMoviesByName(searchQuery);
             PopulateMovieList(filteredMovies);
         }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+
+        }
+
     }
 }
