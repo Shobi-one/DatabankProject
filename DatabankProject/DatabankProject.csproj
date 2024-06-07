@@ -188,7 +188,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="assets\img\" />
+    <Folder Include="assets\img\movies\" />
     <Folder Include="assets\scripts\" />
   </ItemGroup>
   <ItemGroup>
