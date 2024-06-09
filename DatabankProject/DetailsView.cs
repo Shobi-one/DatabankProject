@@ -1,12 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Net;
 using System.Net.Mail;
 
 namespace DatabankProject
 {
-    public partial class Details : Form
+    public partial class detailsView : Form
     {
         private Label lblDetails;
         private Button btnOrder;
@@ -15,7 +21,7 @@ namespace DatabankProject
         private string itemType;
         private string itemName;
 
-        public Details(string type, string name)
+        public detailsView(string type, string name)
         {
             InitializeComponent();
             dbHelper = new DatabaseHelper();
@@ -58,7 +64,7 @@ namespace DatabankProject
             // 
             // btnWriteReview
             // 
-            this.btnWriteReview.Location = new System.Drawing.Point(36, 230);
+            this.btnWriteReview.Location = new System.Drawing.Point(16, 230);
             this.btnWriteReview.Name = "btnWriteReview";
             this.btnWriteReview.Size = new System.Drawing.Size(100, 23);
             this.btnWriteReview.TabIndex = 2;

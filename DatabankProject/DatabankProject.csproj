@@ -117,11 +117,11 @@
     <Compile Include="DashboardView.Designer.cs">
       <DependentUpon>DashboardView.cs</DependentUpon>
     </Compile>
-    <Compile Include="DetailsView.cs">
+    <Compile Include="detailsView.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="DetailsView.Designer.cs">
-      <DependentUpon>DetailsView.cs</DependentUpon>
+    <Compile Include="detailsView.Designer.cs">
+      <DependentUpon>detailsView.cs</DependentUpon>
     </Compile>
     <Compile Include="EditMovieView.cs">
       <SubType>Form</SubType>
@@ -159,9 +159,6 @@
     </Compile>
     <EmbeddedResource Include="DashboardView.resx">
       <DependentUpon>DashboardView.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="DetailsView.resx">
-      <DependentUpon>DetailsView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="HomeView.resx">
       <DependentUpon>HomeView.cs</DependentUpon>
@@ -208,6 +205,9 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="assets\img\userico.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="assets\img\default_movie_image.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

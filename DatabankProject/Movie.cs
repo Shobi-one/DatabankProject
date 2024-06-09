@@ -18,5 +18,6 @@ namespace DatabankProject
         public int Duration { get; set; }
         public int Amount { get; set; }
         public bool IsInactive { get; set; }
+        public string ImgPath { get; set; }
     }
 }

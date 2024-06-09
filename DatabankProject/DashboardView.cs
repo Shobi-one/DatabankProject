@@ -74,7 +74,7 @@ namespace DatabankProject
 
         private void ShowDetails(string type, string name)
         {
-            Details detailsView = new Details(type, name);
+            detailsView detailsView = new detailsView(type, name);
             detailsView.ShowDialog();
         }
 
