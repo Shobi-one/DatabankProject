@@ -151,6 +151,7 @@ namespace DatabankProject
             this.Text = "Home";
             this.Load += new System.EventHandler(this.HomeView_Load);
             this.Click += new System.EventHandler(this.HomeView_Click);
+            this.Enter += new System.EventHandler(this.HomeView_Enter);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbUser)).EndInit();

@@ -274,6 +274,7 @@ namespace DatabankProject
         private void Logo_Click(object sender, EventArgs e)
         {
             pnlDrop.Visible = false;
+            PopulateMovieList(dbHelper.GetMovies().Distinct().ToList());
         }
 
         private void txtSearch_TextChanged(object sender, EventArgs e)
@@ -328,6 +329,11 @@ namespace DatabankProject
         private void lblExit_Click(object sender, EventArgs e)
         {
             Application.Exit();
+        }
+
+        private void HomeView_Enter(object sender, EventArgs e)
+        {
+            PopulateMovieList(dbHelper.GetMovies().Distinct().ToList());
         }
     }
 }
