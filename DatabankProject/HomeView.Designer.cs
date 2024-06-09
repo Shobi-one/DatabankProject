@@ -30,11 +30,14 @@ namespace DatabankProject
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
-            this.txtSearch = new System.Windows.Forms.TextBox();
-            this.lbMovies = new System.Windows.Forms.ListBox();
+            this.pnlUser = new System.Windows.Forms.Panel();
+            this.lblUser = new System.Windows.Forms.Label();
             this.pbUser = new System.Windows.Forms.PictureBox();
+            this.txtSearch = new System.Windows.Forms.TextBox();
             this.pbLogo = new System.Windows.Forms.PictureBox();
+            this.lbMovies = new System.Windows.Forms.ListBox();
             this.panel1.SuspendLayout();
+            this.pnlUser.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbUser)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbLogo)).BeginInit();
             this.SuspendLayout();
@@ -42,13 +45,45 @@ namespace DatabankProject
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.Black;
-            this.panel1.Controls.Add(this.pbUser);
+            this.panel1.Controls.Add(this.pnlUser);
             this.panel1.Controls.Add(this.txtSearch);
             this.panel1.Controls.Add(this.pbLogo);
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1039, 55);
             this.panel1.TabIndex = 0;
+            // 
+            // pnlUser
+            // 
+            this.pnlUser.Controls.Add(this.lblUser);
+            this.pnlUser.Controls.Add(this.pbUser);
+            this.pnlUser.Location = new System.Drawing.Point(854, 3);
+            this.pnlUser.Name = "pnlUser";
+            this.pnlUser.Size = new System.Drawing.Size(112, 48);
+            this.pnlUser.TabIndex = 2;
+            this.pnlUser.Click += new System.EventHandler(this.pnlUser_Click);
+            // 
+            // lblUser
+            // 
+            this.lblUser.AutoSize = true;
+            this.lblUser.BackColor = System.Drawing.Color.Transparent;
+            this.lblUser.ForeColor = System.Drawing.Color.White;
+            this.lblUser.Location = new System.Drawing.Point(36, 17);
+            this.lblUser.Name = "lblUser";
+            this.lblUser.Size = new System.Drawing.Size(67, 13);
+            this.lblUser.TabIndex = 3;
+            this.lblUser.Text = "Sample User";
+            // 
+            // pbUser
+            // 
+            this.pbUser.BackColor = System.Drawing.Color.Transparent;
+            this.pbUser.Image = global::DatabankProject.Properties.Resources.userico;
+            this.pbUser.Location = new System.Drawing.Point(3, 7);
+            this.pbUser.Name = "pbUser";
+            this.pbUser.Size = new System.Drawing.Size(32, 32);
+            this.pbUser.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pbUser.TabIndex = 2;
+            this.pbUser.TabStop = false;
             // 
             // txtSearch
             // 
@@ -65,25 +100,6 @@ namespace DatabankProject
             this.txtSearch.Enter += new System.EventHandler(this.txtSearch_Enter);
             this.txtSearch.Leave += new System.EventHandler(this.txtSearch_Leave);
             // 
-            // lbMovies
-            // 
-            this.lbMovies.FormattingEnabled = true;
-            this.lbMovies.Location = new System.Drawing.Point(8, 61);
-            this.lbMovies.Name = "lbMovies";
-            this.lbMovies.Size = new System.Drawing.Size(120, 95);
-            this.lbMovies.TabIndex = 1;
-            // 
-            // pbUser
-            // 
-            this.pbUser.BackColor = System.Drawing.Color.Transparent;
-            this.pbUser.Image = global::DatabankProject.Properties.Resources.userico;
-            this.pbUser.Location = new System.Drawing.Point(854, 8);
-            this.pbUser.Name = "pbUser";
-            this.pbUser.Size = new System.Drawing.Size(32, 32);
-            this.pbUser.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pbUser.TabIndex = 2;
-            this.pbUser.TabStop = false;
-            // 
             // pbLogo
             // 
             this.pbLogo.BackColor = System.Drawing.Color.Transparent;
@@ -95,6 +111,14 @@ namespace DatabankProject
             this.pbLogo.TabIndex = 1;
             this.pbLogo.TabStop = false;
             this.pbLogo.Click += new System.EventHandler(this.Logo_Click);
+            // 
+            // lbMovies
+            // 
+            this.lbMovies.FormattingEnabled = true;
+            this.lbMovies.Location = new System.Drawing.Point(8, 61);
+            this.lbMovies.Name = "lbMovies";
+            this.lbMovies.Size = new System.Drawing.Size(120, 95);
+            this.lbMovies.TabIndex = 1;
             // 
             // HomeView
             // 
@@ -109,6 +133,8 @@ namespace DatabankProject
             this.Load += new System.EventHandler(this.HomeView_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            this.pnlUser.ResumeLayout(false);
+            this.pnlUser.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbUser)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbLogo)).EndInit();
             this.ResumeLayout(false);
@@ -122,6 +148,8 @@ namespace DatabankProject
         private System.Windows.Forms.TextBox txtSearch;
         private System.Windows.Forms.ListBox lbMovies;
         private System.Windows.Forms.PictureBox pbUser;
+        private System.Windows.Forms.Panel pnlUser;
+        private System.Windows.Forms.Label lblUser;
     }
 }
 

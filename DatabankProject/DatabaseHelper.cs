@@ -336,5 +336,30 @@ namespace DatabankProject
                 return false;
             }
         }
+
+        public bool AddReview(string movieTitle, string reviewText)
+        {
+            try
+            {
+                using (MySqlConnection conn = new MySqlConnection(connectionString))
+                {
+                    conn.Open();
+                    string query = "INSERT INTO tblreviews (movie_title, review_text, review_date) VALUES (@movieTitle, @reviewText, @reviewDate)";
+                    using (MySqlCommand cmd = new MySqlCommand(query, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@movieTitle", movieTitle);
+                        cmd.Parameters.AddWithValue("@reviewText", reviewText);
+                        cmd.Parameters.AddWithValue("@reviewDate", DateTime.Now);
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+                return true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message);
+                return false;
+            }
+        }
     }
 }

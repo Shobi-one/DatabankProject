@@ -13,6 +13,7 @@ namespace DatabankProject
     public partial class HomeView : Form
     {
         private DatabaseHelper dbHelper;
+        private string loggedInUser;
 
         public HomeView()
         {
@@ -21,8 +22,23 @@ namespace DatabankProject
             this.Text = string.Empty;
             this.ControlBox = false;
             this.FormBorderStyle = FormBorderStyle.SizableToolWindow;
+            UpdateUI();
 
             this.txtSearch.KeyPress += new System.Windows.Forms.KeyPressEventHandler(CheckEnterKeyPress);
+        }
+
+        private void UpdateUI()
+        {
+            if (string.IsNullOrEmpty(loggedInUser))
+            {
+                // User is not logged in
+                lblUser.Text = "Please login!";
+            }
+            else
+            {
+                // User is logged in
+                lblUser.Text = loggedInUser;
+            }
         }
 
         private void dashboardToolStripMenuItem_Click(object sender, EventArgs e)
@@ -45,6 +61,7 @@ namespace DatabankProject
             lbMovies.Items.AddRange(dbHelper.GetMovies().Distinct().ToArray());
             lbMovies.DoubleClick += LbMovies_DoubleClick;
             Controls.Add(lbMovies);
+            lblUser.Text = "Please login!";
         }
 
         private void LbMovies_DoubleClick(object sender, EventArgs e)
@@ -95,6 +112,25 @@ namespace DatabankProject
         private void Logo_Click(object sender, EventArgs e)
         {
 
+        }
+        private void pnlUser_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void lblLogin_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lblRegister_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lblExit_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
         }
     }
 }
