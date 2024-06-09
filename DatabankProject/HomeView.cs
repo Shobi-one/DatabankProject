@@ -18,6 +18,7 @@ namespace DatabankProject
         private Panel detailsPanel;
         private Button orderButton;
         private Button reviewButton;
+        private Button showReviewsButton;
 
         public HomeView()
         {
@@ -53,10 +54,20 @@ namespace DatabankProject
 
             orderButton.Visible = false;
             reviewButton.Visible = false;
+
+            showReviewsButton = new Button();
+            showReviewsButton.Text = "Show All Reviews";
+            showReviewsButton.ForeColor = Color.White;
+            showReviewsButton.Location = new Point(450, 330);
+            showReviewsButton.Click += ShowReviewsButton_Click;
+            this.Controls.Add(showReviewsButton);
+
+            showReviewsButton.Visible = false;
         }
 
         private void OrderButton_Click(object sender, EventArgs e)
         {
+            pnlDrop.Visible = false;
             if (lbMovies.SelectedItem != null)
             {
                 string selectedMovie = lbMovies.SelectedItem.ToString();
@@ -150,6 +161,7 @@ namespace DatabankProject
 
         private void ReviewButton_Click(object sender, EventArgs e)
         {
+            pnlDrop.Visible = false;
             // Handle review button click event
             if (lbMovies.SelectedItem != null)
             {
@@ -193,6 +205,7 @@ namespace DatabankProject
 
         private void LbMovies_DoubleClick(object sender, EventArgs e)
         {
+            pnlDrop.Visible = false;
             if (lbMovies.SelectedItem != null)
             {
                 string selectedMovie = lbMovies.SelectedItem.ToString();
@@ -202,6 +215,7 @@ namespace DatabankProject
 
         private void ShowDetails(string type, string name)
         {
+            pnlDrop.Visible = false;
             if (type == "Movie")
             {
                 Dictionary<string, string> details = dbHelper.GetMovieDetails(name);
@@ -213,6 +227,7 @@ namespace DatabankProject
                 DisplayMovieDetails(details);
                 orderButton.Visible = true;
                 reviewButton.Visible = true;
+                showReviewsButton.Visible = true;
             }
         }
 
@@ -236,15 +251,18 @@ namespace DatabankProject
         private void txtSearch_Enter(object sender, EventArgs e)
         {
             txtSearch.Text = string.Empty;
+            pnlDrop.Visible = false;
         }
 
         private void txtSearch_Leave(object sender, EventArgs e)
         {
             txtSearch.Text = "🔎︎ Search";
+            pnlDrop.Visible = false;
         }
 
         private void CheckEnterKeyPress(object sender, System.Windows.Forms.KeyPressEventArgs e)
         {
+            pnlDrop.Visible = false;
             if (e.KeyChar == (char)Keys.Return)
             {
                 string searchQuery = txtSearch.Text;
@@ -255,7 +273,7 @@ namespace DatabankProject
 
         private void Logo_Click(object sender, EventArgs e)
         {
-
+            pnlDrop.Visible = false;
         }
 
         private void txtSearch_TextChanged(object sender, EventArgs e)
@@ -265,10 +283,51 @@ namespace DatabankProject
 
         private void HomeView_Click(object sender, EventArgs e)
         {
+            pnlDrop.Visible = false;
             if (txtSearch.Text == "")
             {
                 txtSearch.Text = "🔎︎ Search";
             }
+        }
+
+        private void pbUser_Click(object sender, EventArgs e)
+        {
+            pnlDrop.Visible = true;
+        }
+
+        private void lblDash_Click(object sender, EventArgs e)
+        {
+            DashboardView dashboard = new DashboardView();
+            dashboard.ShowDialog();
+        }
+
+        private void ShowReviewsButton_Click(object sender, EventArgs e)
+        {
+            if (lbMovies.SelectedItem != null)
+            {
+                string selectedMovie = lbMovies.SelectedItem.ToString();
+                List<string> reviews = dbHelper.GetReviews(selectedMovie);
+
+                if (reviews.Count > 0)
+                {
+                    StringBuilder reviewsText = new StringBuilder();
+                    foreach (string review in reviews)
+                    {
+                        reviewsText.AppendLine(review);
+                        reviewsText.AppendLine(new string('-', 50));
+                    }
+                    MessageBox.Show(reviewsText.ToString(), "Reviews for " + selectedMovie);
+                }
+                else
+                {
+                    MessageBox.Show("No reviews available for this movie.", "Reviews for " + selectedMovie);
+                }
+            }
+        }
+
+        private void lblExit_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
         }
     }
 }

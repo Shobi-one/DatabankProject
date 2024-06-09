@@ -33,6 +33,10 @@ namespace DatabankProject
             this.lbUsers = new System.Windows.Forms.ListBox();
             this.btnAddMovie = new System.Windows.Forms.Button();
             this.btnAddUser = new System.Windows.Forms.Button();
+            this.pbLogo = new System.Windows.Forms.PictureBox();
+            this.panel1 = new System.Windows.Forms.Panel();
+            ((System.ComponentModel.ISupportInitialize)(this.pbLogo)).BeginInit();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // lbMovies
@@ -73,18 +77,42 @@ namespace DatabankProject
             this.btnAddUser.UseVisualStyleBackColor = true;
             this.btnAddUser.Click += new System.EventHandler(this.btnAddUser_Click);
             // 
+            // pbLogo
+            // 
+            this.pbLogo.BackColor = System.Drawing.Color.Transparent;
+            this.pbLogo.Image = global::DatabankProject.Properties.Resources.img;
+            this.pbLogo.Location = new System.Drawing.Point(8, 7);
+            this.pbLogo.Name = "pbLogo";
+            this.pbLogo.Size = new System.Drawing.Size(120, 38);
+            this.pbLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pbLogo.TabIndex = 1;
+            this.pbLogo.TabStop = false;
+            // 
+            // panel1
+            // 
+            this.panel1.BackColor = System.Drawing.Color.Black;
+            this.panel1.Controls.Add(this.pbLogo);
+            this.panel1.Location = new System.Drawing.Point(-1, -1);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(1039, 55);
+            this.panel1.TabIndex = 4;
+            // 
             // DashboardView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(28)))), ((int)(((byte)(28)))));
             this.ClientSize = new System.Drawing.Size(1009, 610);
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.btnAddUser);
             this.Controls.Add(this.btnAddMovie);
             this.Controls.Add(this.lbUsers);
             this.Controls.Add(this.lbMovies);
             this.Name = "DashboardView";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Dashboard";
+            ((System.ComponentModel.ISupportInitialize)(this.pbLogo)).EndInit();
+            this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -95,5 +123,7 @@ namespace DatabankProject
         private System.Windows.Forms.ListBox lbUsers;
         private System.Windows.Forms.Button btnAddMovie;
         private System.Windows.Forms.Button btnAddUser;
+        private System.Windows.Forms.PictureBox pbLogo;
+        private System.Windows.Forms.Panel panel1;
     }
 }

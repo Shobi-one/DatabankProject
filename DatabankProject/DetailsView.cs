@@ -17,6 +17,7 @@ namespace DatabankProject
         private Label lblDetails;
         private Button btnOrder;
         private Button btnWriteReview;
+        private Button btnViewReviews;
         private DatabaseHelper dbHelper;
         private string itemType;
         private string itemName;
@@ -41,6 +42,7 @@ namespace DatabankProject
             this.lblDetails = new Label();
             this.btnOrder = new Button();
             this.btnWriteReview = new Button();
+            this.btnViewReviews = new Button();
             this.SuspendLayout();
             // 
             // lblDetails
@@ -71,6 +73,21 @@ namespace DatabankProject
             this.btnWriteReview.Text = "Write Review";
             this.btnWriteReview.UseVisualStyleBackColor = true;
             this.btnWriteReview.Click += new System.EventHandler(this.btnWriteReview_Click);
+            // 
+            // btnViewReviews
+            // 
+            this.btnViewReviews.Location = new System.Drawing.Point(16, 260);
+            this.btnViewReviews.Name = "btnViewReviews";
+            this.btnViewReviews.Size = new System.Drawing.Size(100, 23);
+            this.btnViewReviews.TabIndex = 3;
+            this.btnViewReviews.Text = "View Reviews";
+            this.btnViewReviews.UseVisualStyleBackColor = true;
+            this.btnViewReviews.Click += new System.EventHandler(this.btnViewReviews_Click);
+            // 
+            // Details
+            // 
+            this.ClientSize = new System.Drawing.Size(284, 261);
+            this.Controls.Add(this.btnViewReviews);
             // 
             // Details
             // 
@@ -118,6 +135,14 @@ namespace DatabankProject
             catch (Exception ex)
             {
                 MessageBox.Show($"Failed to send order confirmation email: {ex.Message}");
+            }
+        }
+
+        private void btnViewReviews_Click(object sender, EventArgs e)
+        {
+            using (ReviewsForm reviewsForm = new ReviewsForm(itemName))
+            {
+                reviewsForm.ShowDialog();
             }
         }
 

@@ -34,9 +34,13 @@ namespace DatabankProject
             this.txtSearch = new System.Windows.Forms.TextBox();
             this.pbLogo = new System.Windows.Forms.PictureBox();
             this.lbMovies = new System.Windows.Forms.ListBox();
+            this.pnlDrop = new System.Windows.Forms.Panel();
+            this.lblExit = new System.Windows.Forms.Label();
+            this.lblDash = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbUser)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbLogo)).BeginInit();
+            this.pnlDrop.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
@@ -54,12 +58,13 @@ namespace DatabankProject
             // 
             this.pbUser.BackColor = System.Drawing.Color.Transparent;
             this.pbUser.Image = global::DatabankProject.Properties.Resources.userico;
-            this.pbUser.Location = new System.Drawing.Point(416, 7);
+            this.pbUser.Location = new System.Drawing.Point(557, 7);
             this.pbUser.Name = "pbUser";
             this.pbUser.Size = new System.Drawing.Size(32, 32);
             this.pbUser.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pbUser.TabIndex = 2;
             this.pbUser.TabStop = false;
+            this.pbUser.Click += new System.EventHandler(this.pbUser_Click);
             // 
             // txtSearch
             // 
@@ -67,7 +72,7 @@ namespace DatabankProject
             this.txtSearch.BackColor = System.Drawing.Color.Black;
             this.txtSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtSearch.ForeColor = System.Drawing.Color.White;
-            this.txtSearch.Location = new System.Drawing.Point(269, 13);
+            this.txtSearch.Location = new System.Drawing.Point(410, 13);
             this.txtSearch.Name = "txtSearch";
             this.txtSearch.Size = new System.Drawing.Size(141, 26);
             this.txtSearch.TabIndex = 1;
@@ -97,12 +102,48 @@ namespace DatabankProject
             this.lbMovies.Size = new System.Drawing.Size(219, 303);
             this.lbMovies.TabIndex = 1;
             // 
+            // pnlDrop
+            // 
+            this.pnlDrop.BackColor = System.Drawing.Color.Black;
+            this.pnlDrop.Controls.Add(this.lblExit);
+            this.pnlDrop.Controls.Add(this.lblDash);
+            this.pnlDrop.Location = new System.Drawing.Point(530, 55);
+            this.pnlDrop.Name = "pnlDrop";
+            this.pnlDrop.Size = new System.Drawing.Size(66, 57);
+            this.pnlDrop.TabIndex = 3;
+            this.pnlDrop.Visible = false;
+            // 
+            // lblExit
+            // 
+            this.lblExit.AutoSize = true;
+            this.lblExit.BackColor = System.Drawing.Color.Black;
+            this.lblExit.ForeColor = System.Drawing.Color.White;
+            this.lblExit.Location = new System.Drawing.Point(21, 28);
+            this.lblExit.Name = "lblExit";
+            this.lblExit.Size = new System.Drawing.Size(24, 13);
+            this.lblExit.TabIndex = 1;
+            this.lblExit.Text = "Exit";
+            this.lblExit.Click += new System.EventHandler(this.lblExit_Click);
+            // 
+            // lblDash
+            // 
+            this.lblDash.AutoSize = true;
+            this.lblDash.BackColor = System.Drawing.Color.Black;
+            this.lblDash.ForeColor = System.Drawing.Color.White;
+            this.lblDash.Location = new System.Drawing.Point(4, 6);
+            this.lblDash.Name = "lblDash";
+            this.lblDash.Size = new System.Drawing.Size(59, 13);
+            this.lblDash.TabIndex = 0;
+            this.lblDash.Text = "Dashboard";
+            this.lblDash.Click += new System.EventHandler(this.lblDash_Click);
+            // 
             // HomeView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(30)))));
-            this.ClientSize = new System.Drawing.Size(464, 373);
+            this.ClientSize = new System.Drawing.Size(596, 373);
+            this.Controls.Add(this.pnlDrop);
             this.Controls.Add(this.lbMovies);
             this.Controls.Add(this.panel1);
             this.Name = "HomeView";
@@ -114,6 +155,8 @@ namespace DatabankProject
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbUser)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbLogo)).EndInit();
+            this.pnlDrop.ResumeLayout(false);
+            this.pnlDrop.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -125,6 +168,9 @@ namespace DatabankProject
         private System.Windows.Forms.TextBox txtSearch;
         private System.Windows.Forms.ListBox lbMovies;
         private System.Windows.Forms.PictureBox pbUser;
+        private System.Windows.Forms.Panel pnlDrop;
+        private System.Windows.Forms.Label lblExit;
+        private System.Windows.Forms.Label lblDash;
     }
 }
 

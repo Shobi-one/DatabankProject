@@ -13,15 +13,16 @@ namespace DatabankProject
     public partial class EditMovieView : Form
     {
         private DatabaseHelper dbHelper;
+        private Movie movie;
 
         public EditMovieView(Movie movie)
         {
             InitializeComponent();
             dbHelper = new DatabaseHelper();
+            this.movie = movie;
 
             this.Text = "Edit Movie";
             this.ClientSize = new System.Drawing.Size(300, 500);
-
 
             var lblTitle = new Label { Text = "Title:", Left = 0, Top = 20 };
             var txtTitle = new TextBox { Left = 100, Top = 20, Width = 150 };
@@ -47,7 +48,7 @@ namespace DatabankProject
             var lblDuration = new Label { Text = "Duration:", Left = 0, Top = 340 };
             var numDuration = new NumericUpDown { Left = 100, Top = 340, Width = 150, Minimum = 1, Maximum = 600 };
 
-            var btnAdd = new Button { Text = "Add", Left = 100, Top = 380, Width = 80 };
+            var btnSave = new Button { Text = "Save", Left = 100, Top = 380, Width = 80 };
             var btnMakeInactive = new Button { Text = "Make Inactive", Left = 100, Top = 420, Width = 120 };
             btnMakeInactive.Click += (sender, e) =>
             {
@@ -55,16 +56,20 @@ namespace DatabankProject
                 this.Close();
             };
 
-            btnAdd.Click += (sender, e) =>
+            btnSave.Click += (sender, e) =>
             {
-                if (txtTitle == null || txtGenre == null || txtDirector == null || txtSynopsis == null || dtpReleaseDate == null || txtLanguage == null || numDuration == null)
+                if (movie == null)
                 {
-                    MessageBox.Show("One or more controls are not properly initialized.");
-                    return;
+                    // Add new movie
+                    dbHelper.AddMovie(txtTitle.Text, txtGenre.Text, txtDirector.Text, txtSynopsis.Text, dtpReleaseDate.Value, txtLanguage.Text, (int)numDuration.Value, txtAmount.Text, 0);
+                    MessageBox.Show($"Movie {txtTitle.Text} added");
                 }
-
-                dbHelper.AddMovie(txtTitle.Text, txtGenre.Text, txtDirector.Text, txtSynopsis.Text, dtpReleaseDate.Value, txtLanguage.Text, (int)numDuration.Value, txtAmount.Text, 0);
-                MessageBox.Show($"Movie {txtTitle.Text} added");
+                else
+                {
+                    // Update existing movie
+                    dbHelper.UpdateMovie(movie.MovieId, txtTitle.Text, txtGenre.Text, txtDirector.Text, txtSynopsis.Text, dtpReleaseDate.Value, txtLanguage.Text, (int)numDuration.Value, int.Parse(txtAmount.Text));
+                    MessageBox.Show($"Movie {txtTitle.Text} updated");
+                }
                 this.Close();
             };
 
@@ -82,19 +87,22 @@ namespace DatabankProject
             this.Controls.Add(txtLanguage);
             this.Controls.Add(lblDuration);
             this.Controls.Add(numDuration);
-            this.Controls.Add(btnAdd);
+            this.Controls.Add(btnSave);
             this.Controls.Add(lblAmount);
             this.Controls.Add(txtAmount);
             this.Controls.Add(btnMakeInactive);
 
-            txtTitle.Text = movie.Title;
-            txtGenre.Text = movie.Genre;
-            txtDirector.Text = movie.Director;
-            txtSynopsis.Text = movie.Synopsis;
-            dtpReleaseDate.Value = movie.ReleaseDate;
-            txtLanguage.Text = movie.Language;
-            numDuration.Value = movie.Duration;
-            txtAmount.Text = movie.Amount.ToString();
+            if (movie != null)
+            {
+                txtTitle.Text = movie.Title;
+                txtGenre.Text = movie.Genre;
+                txtDirector.Text = movie.Director;
+                txtSynopsis.Text = movie.Synopsis;
+                dtpReleaseDate.Value = movie.ReleaseDate;
+                txtLanguage.Text = movie.Language;
+                numDuration.Value = movie.Duration;
+                txtAmount.Text = movie.Amount.ToString();
+            }
         }
     }
 }

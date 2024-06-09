@@ -361,5 +361,77 @@ namespace DatabankProject
                 return false;
             }
         }
+
+        public List<string> GetReviews(string movieTitle)
+        {
+            List<string> reviews = new List<string>();
+            using (MySqlConnection conn = new MySqlConnection(connectionString))
+            {
+                conn.Open();
+                MySqlCommand cmd = new MySqlCommand("SELECT review_text FROM tblreviews WHERE movie_title = @title", conn);
+                cmd.Parameters.AddWithValue("@title", movieTitle);
+                using (MySqlDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        reviews.Add(reader.GetString(0));
+                    }
+                }
+            }
+            return reviews;
+        }
+
+        public string GetReviewText(string movieTitle, string reviewSummary)
+        {
+            using (MySqlConnection conn = new MySqlConnection(connectionString))
+            {
+                conn.Open();
+                MySqlCommand cmd = new MySqlCommand("SELECT review_text FROM tblreviews WHERE movie_title = @title AND review_text = @summary", conn);
+                cmd.Parameters.AddWithValue("@title", movieTitle);
+                cmd.Parameters.AddWithValue("@summary", reviewSummary);
+                return cmd.ExecuteScalar()?.ToString();
+            }
+        }
+
+        public void UpdateUser(int userId, string username, string email, string firstName, string lastName, bool isAdmin)
+        {
+            using (MySqlConnection conn = new MySqlConnection(connectionString))
+            {
+                conn.Open();
+                string query = "UPDATE tblusers SET username = @Username, email = @Email, first_name = @FirstName, last_name = @LastName, is_admin = @IsAdmin, updated_at = NOW() WHERE user_id = @UserId";
+                using (MySqlCommand cmd = new MySqlCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("@Username", username);
+                    cmd.Parameters.AddWithValue("@Email", email);
+                    cmd.Parameters.AddWithValue("@FirstName", firstName);
+                    cmd.Parameters.AddWithValue("@LastName", lastName);
+                    cmd.Parameters.AddWithValue("@IsAdmin", isAdmin);
+                    cmd.Parameters.AddWithValue("@UserId", userId);
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
+        public void UpdateMovie(int movieId, string title, string genre, string director, string synopsis, DateTime releaseDate, string language, int duration, int amount)
+        {
+            using (MySqlConnection conn = new MySqlConnection(connectionString))
+            {
+                conn.Open();
+                string query = "UPDATE tblmovies SET title = @Title, genre = @Genre, director = @Director, synopsis = @Synopsis, release_date = @ReleaseDate, language = @Language, duration = @Duration, amount = @Amount, updated_at = NOW() WHERE movie_id = @MovieId";
+                using (MySqlCommand cmd = new MySqlCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("@Title", title);
+                    cmd.Parameters.AddWithValue("@Genre", genre);
+                    cmd.Parameters.AddWithValue("@Director", director);
+                    cmd.Parameters.AddWithValue("@Synopsis", synopsis);
+                    cmd.Parameters.AddWithValue("@ReleaseDate", releaseDate);
+                    cmd.Parameters.AddWithValue("@Language", language);
+                    cmd.Parameters.AddWithValue("@Duration", duration);
+                    cmd.Parameters.AddWithValue("@Amount", amount);
+                    cmd.Parameters.AddWithValue("@MovieId", movieId);
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
     }
 }
