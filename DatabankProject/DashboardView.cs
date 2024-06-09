@@ -1,11 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using MySql.Data;
 
@@ -19,14 +13,12 @@ namespace DatabankProject
         {
             InitializeComponent();
             dbHelper = new DatabaseHelper();
-            LoadData();
+            RefreshLists();
         }
 
         private void DashboardView_Load(object sender, EventArgs e)
         {
-            // Load data from the database
-            lbMovies.Items.AddRange(dbHelper.GetMovies().ToArray());
-            lbUsers.Items.AddRange(dbHelper.GetUsers().ToArray());
+            RefreshLists();
 
             lbMovies.DoubleClick += LbMovies_DoubleClick;
             lbUsers.DoubleClick += LbUsers_DoubleClick;
@@ -37,21 +29,20 @@ namespace DatabankProject
 
         private void LoadData()
         {
+            // This method is no longer necessary as RefreshLists is used instead.
+        }
+
+        private void RefreshLists()
+        {
             // Load data from the database and populate the lists
             List<string> movies = dbHelper.GetMovies();
             List<string> users = dbHelper.GetUsers();
 
             lbMovies.Items.Clear();
-            foreach (string movie in movies)
-            {
-                lbMovies.Items.Add(movie);
-            }
+            lbMovies.Items.AddRange(movies.ToArray());
 
             lbUsers.Items.Clear();
-            foreach (string user in users)
-            {
-                lbUsers.Items.Add(user);
-            }
+            lbUsers.Items.AddRange(users.ToArray());
         }
 
         private void LbMovies_DoubleClick(object sender, EventArgs e)
@@ -60,6 +51,7 @@ namespace DatabankProject
             {
                 string selectedMovie = lbMovies.SelectedItem.ToString();
                 ShowDetails("Movie", selectedMovie);
+                RefreshLists();
             }
         }
 
@@ -69,27 +61,29 @@ namespace DatabankProject
             {
                 string selectedUser = lbUsers.SelectedItem.ToString();
                 ShowDetails("User", selectedUser);
+                RefreshLists();
             }
         }
 
         private void ShowDetails(string type, string name)
         {
-            Details detailsView = new Details(type, name);
+            detailsView detailsView = new detailsView(type, name);
             detailsView.ShowDialog();
+            RefreshLists();
         }
 
         private void btnAddMovie_Click(object sender, EventArgs e)
         {
             AddMovieView addMovieForm = new AddMovieView();
             addMovieForm.ShowDialog();
-            LoadData();
+            RefreshLists();
         }
 
         private void btnAddUser_Click(object sender, EventArgs e)
         {
             AddUserView addUserForm = new AddUserView();
             addUserForm.ShowDialog();
-            LoadData();
+            RefreshLists();
         }
 
         private void lbMovies_SelectedIndexChanged(object sender, EventArgs e)
@@ -102,6 +96,7 @@ namespace DatabankProject
                 {
                     EditMovieView EditMovieForm = new EditMovieView(movie);
                     EditMovieForm.ShowDialog();
+                    RefreshLists();
                 }
             }
         }
@@ -116,6 +111,7 @@ namespace DatabankProject
                 {
                     EditUserView editUserForm = new EditUserView(user);
                     editUserForm.ShowDialog();
+                    RefreshLists();
                 }
             }
         }

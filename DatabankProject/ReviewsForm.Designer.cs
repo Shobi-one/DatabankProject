@@ -1,7 +1,7 @@
 ﻿
 namespace DatabankProject
 {
-    partial class detailsView
+    partial class ReviewsForm
     {
         /// <summary>
         /// Required designer variable.
@@ -32,7 +32,7 @@ namespace DatabankProject
             this.components = new System.ComponentModel.Container();
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Text = "detailsView";
+            this.Text = "ReviewsForm";
         }
 
         #endregion

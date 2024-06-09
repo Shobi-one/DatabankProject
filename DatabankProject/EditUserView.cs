@@ -13,10 +13,13 @@ namespace DatabankProject
     public partial class EditUserView : Form
     {
         private DatabaseHelper dbHelper;
+        private User user;
+
         public EditUserView(User user)
         {
             InitializeComponent();
             dbHelper = new DatabaseHelper();
+            this.user = user;
 
             this.Text = "Edit User";
             this.ClientSize = new System.Drawing.Size(300, 400);
@@ -38,12 +41,21 @@ namespace DatabankProject
 
             var chkIsAdmin = new CheckBox { Text = "Is Admin", Left = 100, Top = 220 };
 
-            var btnAdd = new Button { Text = "Add", Left = 100, Top = 260, Width = 80 };
-            btnAdd.Click += (sender, e) =>
+            var btnSave = new Button { Text = "Save", Left = 100, Top = 260, Width = 80 };
+            btnSave.Click += (sender, e) =>
             {
-                // Code to add the user to the database
-                dbHelper.AddUser(txtUsername.Text, txtPassword.Text, txtEmail.Text, txtFirstName.Text, txtLastName.Text, chkIsAdmin.Checked);
-                MessageBox.Show($"User {txtUsername.Text} added");
+                if (user == null)
+                {
+                    // Add new user
+                    dbHelper.AddUser(txtUsername.Text, txtPassword.Text, txtEmail.Text, txtFirstName.Text, txtLastName.Text, chkIsAdmin.Checked);
+                    MessageBox.Show($"User {txtUsername.Text} added");
+                }
+                else
+                {
+                    // Update existing user
+                    dbHelper.UpdateUser(user.Id, txtUsername.Text, txtEmail.Text, txtFirstName.Text, txtLastName.Text, chkIsAdmin.Checked);
+                    MessageBox.Show($"User {txtUsername.Text} updated");
+                }
                 this.Close();
             };
 
@@ -58,13 +70,16 @@ namespace DatabankProject
             this.Controls.Add(lblLastName);
             this.Controls.Add(txtLastName);
             this.Controls.Add(chkIsAdmin);
-            this.Controls.Add(btnAdd);
+            this.Controls.Add(btnSave);
 
-            txtUsername.Text = user.Username;
-            txtEmail.Text = user.Email;
-            txtFirstName.Text = user.FirstName;
-            txtLastName.Text = user.LastName;
-            chkIsAdmin.Checked = user.IsAdmin;
+            if (user != null)
+            {
+                txtUsername.Text = user.Username;
+                txtEmail.Text = user.Email;
+                txtFirstName.Text = user.FirstName;
+                txtLastName.Text = user.LastName;
+                chkIsAdmin.Checked = user.IsAdmin;
+            }
         }
     }
 }

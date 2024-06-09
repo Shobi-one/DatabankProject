@@ -117,11 +117,11 @@
     <Compile Include="DashboardView.Designer.cs">
       <DependentUpon>DashboardView.cs</DependentUpon>
     </Compile>
-    <Compile Include="DetailsView.cs">
+    <Compile Include="detailsView.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="DetailsView.Designer.cs">
-      <DependentUpon>DetailsView.cs</DependentUpon>
+    <Compile Include="detailsView.Designer.cs">
+      <DependentUpon>detailsView.cs</DependentUpon>
     </Compile>
     <Compile Include="EditMovieView.cs">
       <SubType>Form</SubType>
@@ -150,12 +150,21 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ReviewsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ReviewsForm.Designer.cs">
+      <DependentUpon>ReviewsForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="User.cs" />
+    <Compile Include="WriteReviewForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WriteReviewForm.Designer.cs">
+      <DependentUpon>WriteReviewForm.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="DashboardView.resx">
       <DependentUpon>DashboardView.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="DetailsView.resx">
-      <DependentUpon>DetailsView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="HomeView.resx">
       <DependentUpon>HomeView.cs</DependentUpon>
@@ -171,7 +180,11 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="WriteReviewForm.resx">
+      <DependentUpon>WriteReviewForm.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -187,8 +200,20 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="assets\img\" />
+    <Folder Include="assets\img\movies\" />
     <Folder Include="assets\scripts\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\logo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\img.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="assets\img\userico.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="assets\img\default_movie_image.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

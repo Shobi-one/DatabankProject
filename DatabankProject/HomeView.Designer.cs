@@ -29,101 +29,148 @@ namespace DatabankProject
         /// </summary>
         private void InitializeComponent()
         {
-            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.userToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.adminToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.dashboardToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.lbMovies = new System.Windows.Forms.ListBox();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.pbUser = new System.Windows.Forms.PictureBox();
             this.txtSearch = new System.Windows.Forms.TextBox();
-            this.btnSearch = new System.Windows.Forms.Button();
-            this.menuStrip1.SuspendLayout();
+            this.pbLogo = new System.Windows.Forms.PictureBox();
+            this.lbMovies = new System.Windows.Forms.ListBox();
+            this.pnlDrop = new System.Windows.Forms.Panel();
+            this.lblExit = new System.Windows.Forms.Label();
+            this.lblDash = new System.Windows.Forms.Label();
+            this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbUser)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbLogo)).BeginInit();
+            this.pnlDrop.SuspendLayout();
             this.SuspendLayout();
             // 
-            // menuStrip1
+            // panel1
             // 
-            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.userToolStripMenuItem,
-            this.adminToolStripMenuItem});
-            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
-            this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(800, 24);
-            this.menuStrip1.TabIndex = 1;
-            this.menuStrip1.Text = "menuStrip1";
+            this.panel1.BackColor = System.Drawing.Color.Black;
+            this.panel1.Controls.Add(this.pbUser);
+            this.panel1.Controls.Add(this.txtSearch);
+            this.panel1.Controls.Add(this.pbLogo);
+            this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(1039, 55);
+            this.panel1.TabIndex = 0;
             // 
-            // userToolStripMenuItem
+            // pbUser
             // 
-            this.userToolStripMenuItem.Name = "userToolStripMenuItem";
-            this.userToolStripMenuItem.Size = new System.Drawing.Size(42, 20);
-            this.userToolStripMenuItem.Text = "User";
+            this.pbUser.BackColor = System.Drawing.Color.Transparent;
+            this.pbUser.Image = global::DatabankProject.Properties.Resources.userico;
+            this.pbUser.Location = new System.Drawing.Point(557, 7);
+            this.pbUser.Name = "pbUser";
+            this.pbUser.Size = new System.Drawing.Size(32, 32);
+            this.pbUser.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pbUser.TabIndex = 2;
+            this.pbUser.TabStop = false;
+            this.pbUser.Click += new System.EventHandler(this.pbUser_Click);
             // 
-            // adminToolStripMenuItem
+            // txtSearch
             // 
-            this.adminToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.dashboardToolStripMenuItem});
-            this.adminToolStripMenuItem.Name = "adminToolStripMenuItem";
-            this.adminToolStripMenuItem.Size = new System.Drawing.Size(55, 20);
-            this.adminToolStripMenuItem.Text = "Admin";
+            this.txtSearch.AcceptsReturn = true;
+            this.txtSearch.BackColor = System.Drawing.Color.Black;
+            this.txtSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtSearch.ForeColor = System.Drawing.Color.White;
+            this.txtSearch.Location = new System.Drawing.Point(410, 13);
+            this.txtSearch.Name = "txtSearch";
+            this.txtSearch.Size = new System.Drawing.Size(141, 26);
+            this.txtSearch.TabIndex = 1;
+            this.txtSearch.TabStop = false;
+            this.txtSearch.Text = "🔎︎ Search";
+            this.txtSearch.TextChanged += new System.EventHandler(this.txtSearch_TextChanged);
+            this.txtSearch.Enter += new System.EventHandler(this.txtSearch_Enter);
+            this.txtSearch.Leave += new System.EventHandler(this.txtSearch_Leave);
             // 
-            // dashboardToolStripMenuItem
+            // pbLogo
             // 
-            this.dashboardToolStripMenuItem.Name = "dashboardToolStripMenuItem";
-            this.dashboardToolStripMenuItem.Size = new System.Drawing.Size(131, 22);
-            this.dashboardToolStripMenuItem.Text = "Dashboard";
-            this.dashboardToolStripMenuItem.Click += new System.EventHandler(this.dashboardToolStripMenuItem_Click);
+            this.pbLogo.BackColor = System.Drawing.Color.Transparent;
+            this.pbLogo.Image = global::DatabankProject.Properties.Resources.img;
+            this.pbLogo.Location = new System.Drawing.Point(8, 7);
+            this.pbLogo.Name = "pbLogo";
+            this.pbLogo.Size = new System.Drawing.Size(120, 38);
+            this.pbLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pbLogo.TabIndex = 1;
+            this.pbLogo.TabStop = false;
+            this.pbLogo.Click += new System.EventHandler(this.Logo_Click);
             // 
             // lbMovies
             // 
             this.lbMovies.FormattingEnabled = true;
-            this.lbMovies.Location = new System.Drawing.Point(12, 37);
+            this.lbMovies.Location = new System.Drawing.Point(12, 61);
             this.lbMovies.Name = "lbMovies";
-            this.lbMovies.Size = new System.Drawing.Size(776, 329);
-            this.lbMovies.TabIndex = 2;
+            this.lbMovies.Size = new System.Drawing.Size(219, 303);
+            this.lbMovies.TabIndex = 1;
             // 
-            // txtSearch
+            // pnlDrop
             // 
-            this.txtSearch.Location = new System.Drawing.Point(93, 383);
-            this.txtSearch.Name = "txtSearch";
-            this.txtSearch.Size = new System.Drawing.Size(262, 20);
-            this.txtSearch.TabIndex = 4;
+            this.pnlDrop.BackColor = System.Drawing.Color.Black;
+            this.pnlDrop.Controls.Add(this.lblExit);
+            this.pnlDrop.Controls.Add(this.lblDash);
+            this.pnlDrop.Location = new System.Drawing.Point(530, 55);
+            this.pnlDrop.Name = "pnlDrop";
+            this.pnlDrop.Size = new System.Drawing.Size(66, 57);
+            this.pnlDrop.TabIndex = 3;
+            this.pnlDrop.Visible = false;
             // 
-            // btnSearch
+            // lblExit
             // 
-            this.btnSearch.Location = new System.Drawing.Point(12, 381);
-            this.btnSearch.Name = "btnSearch";
-            this.btnSearch.Size = new System.Drawing.Size(75, 23);
-            this.btnSearch.TabIndex = 5;
-            this.btnSearch.Text = "Search";
-            this.btnSearch.UseVisualStyleBackColor = true;
-            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
+            this.lblExit.AutoSize = true;
+            this.lblExit.BackColor = System.Drawing.Color.Black;
+            this.lblExit.ForeColor = System.Drawing.Color.White;
+            this.lblExit.Location = new System.Drawing.Point(21, 28);
+            this.lblExit.Name = "lblExit";
+            this.lblExit.Size = new System.Drawing.Size(24, 13);
+            this.lblExit.TabIndex = 1;
+            this.lblExit.Text = "Exit";
+            this.lblExit.Click += new System.EventHandler(this.lblExit_Click);
+            // 
+            // lblDash
+            // 
+            this.lblDash.AutoSize = true;
+            this.lblDash.BackColor = System.Drawing.Color.Black;
+            this.lblDash.ForeColor = System.Drawing.Color.White;
+            this.lblDash.Location = new System.Drawing.Point(4, 6);
+            this.lblDash.Name = "lblDash";
+            this.lblDash.Size = new System.Drawing.Size(59, 13);
+            this.lblDash.TabIndex = 0;
+            this.lblDash.Text = "Dashboard";
+            this.lblDash.Click += new System.EventHandler(this.lblDash_Click);
             // 
             // HomeView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.btnSearch);
-            this.Controls.Add(this.txtSearch);
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(30)))));
+            this.ClientSize = new System.Drawing.Size(596, 373);
+            this.Controls.Add(this.pnlDrop);
             this.Controls.Add(this.lbMovies);
-            this.Controls.Add(this.menuStrip1);
-            this.MainMenuStrip = this.menuStrip1;
+            this.Controls.Add(this.panel1);
             this.Name = "HomeView";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Home";
             this.Load += new System.EventHandler(this.HomeView_Load);
-            this.menuStrip1.ResumeLayout(false);
-            this.menuStrip1.PerformLayout();
+            this.Click += new System.EventHandler(this.HomeView_Click);
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbUser)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbLogo)).EndInit();
+            this.pnlDrop.ResumeLayout(false);
+            this.pnlDrop.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
-        private System.Windows.Forms.MenuStrip menuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem userToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem adminToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem dashboardToolStripMenuItem;
-        private System.Windows.Forms.ListBox lbMovies;
+
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.PictureBox pbLogo;
         private System.Windows.Forms.TextBox txtSearch;
-        private System.Windows.Forms.Button btnSearch;
+        private System.Windows.Forms.ListBox lbMovies;
+        private System.Windows.Forms.PictureBox pbUser;
+        private System.Windows.Forms.Panel pnlDrop;
+        private System.Windows.Forms.Label lblExit;
+        private System.Windows.Forms.Label lblDash;
     }
 }
 
